@@ -21,6 +21,10 @@ module.exports = function createS3Stream(filePath, contentType, opts, onEnd){
     ContentType: contentType
   };
 
+  if(opts.CacheControl){
+    params.CacheControl = opts.CacheControl
+  }
+
   s3.upload(params, function(err, data) {
     console.log(err, data);
     onEnd && onEnd(data);
